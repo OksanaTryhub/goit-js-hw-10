@@ -16,11 +16,15 @@ refs.searchBox.addEventListener(
   debounce(onInputCountry, DEBOUNCE_DELAY)
 );
 
+function cleanMarkup() {
+  refs.countryInfo.innerHTML = '';
+  refs.countryList.innerHTML = '';
+}
+
 function onInputCountry(e) {
-  const countryName = refs.searchBox.value;
+  const countryName = refs.searchBox.value.trim();
   if (countryName === '') {
-    refs.countryInfo.innerHTML = '';
-    refs.countryList.innerHTML = '';
+    cleanMarkup();
     return;
   }
 
@@ -30,8 +34,7 @@ function onInputCountry(e) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
-        refs.countryInfo.innerHTML = '';
-        refs.countryList.innerHTML = '';
+        cleanMarkup();
         return;
       }
 
